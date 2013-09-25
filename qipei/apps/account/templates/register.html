@@ -1,0 +1,84 @@
+{% extends "base-log.html" %}
+{% block title %}Account Register{% endblock %}
+{% block content %}
+    <div class="form-actions span7 offset4" align="center">
+
+    <form class="form-horizontal" method="post">{% csrf_token %}
+        <div class="control-group">
+            <label class="control-label" for="id_email">邮箱</label>
+            <div class="controls">
+              <input id="id_email" type="text" name="{{ form.email.name }}" />
+                {% if  form.email.help_text %}
+                <span class="help-block">{{ form.email.help_text }}</span>
+                {% endif %}
+                {% if  form.email.errors %}
+                <span class="help-block">{{ form.email.errors }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="id_username">用户名</label>
+            <div class="controls">
+                <input id="id_username" type="text" name="{{ form.username.name }}" />
+                {% if  form.username.help_text %}
+                <span class="help-block">{{ form.username.help_text }}</span>
+                {% endif %}
+                {% if  form.username.errors %}
+                <span class="help-block">{{ form.username.errors }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="is_password">密码</label>
+            <div class="controls">
+                <input id="is_password" type="password" name="{{ form.password.name }}" />
+                {% if  form.password.help_text %}
+                <span class="help-block">{{ form.password.help_text }}</span>
+                {% endif %}
+                {% if  form.password.errors %}
+                <span class="help-block">{{ form.password.errors }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="id_re_password">重复密码</label>
+            <div class="controls">
+                <input id="id_re_password" type="password" name="{{ form.re_password.name }}" />
+                {% if  form.re_password.help_text %}
+                <span class="help-block">{{ form.re_password.help_text }}</span>
+                {% endif %}
+                {% if  form.re_password.errors %}
+                <span class="help-block">{{ form.re_password.errors }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="id_real_name">真实姓名</label>
+            <div class="controls">
+                <input id="id_real_name" type="text" name="{{ form.real_name.name }}" />
+                {% if  form.real_name.help_text %}
+                <span class="help-block">{{ form.real_name.help_text }}</span>
+                {% endif %}
+                {% if  form.real_name.errors %}
+                <span class="help-block">{{ form.real_name.errors }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <br />
+        <div class="control-group">
+            <div id="login" class="btn-group">
+                <a href="{%url 'login'%}" class="btn btn-primary">登陆</a>
+            </div>
+            <div id="submit" class="btn-group">
+                <input type="submit" class="btn btn-info" value="提交申请">
+            </div>
+            <div id="back" class="btn-group">
+                <a href="{%url 'index'%}" class="btn bar-info">返回网站首页</a>
+            </div>
+        </div>
+    </form>
+
+
+    </div>
+{% endblock %}

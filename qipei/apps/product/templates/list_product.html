@@ -1,0 +1,67 @@
+{% extends "base-admin.html" %}
+{% block title %}
+    管理商品
+{% endblock %}
+
+{% load pagination_tags %}
+
+{% block main %}
+    <h2>商品管理</h2>
+    <hr>
+    <div>
+        <div class="subnav">
+            <ul class="nav nav-pills">
+                <li>分类:</li>
+                <li><a href="#" class="label active">全部</a></li>
+                {% for sort in allsort %}
+                    <li><a href="#" class="label">{{ sort }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    <hr>
+	{% autopaginate products 10 %}
+    <table class="table table-hover">
+		<tr class="warning">
+			<td>图片</td>
+			<td>商品名</td>
+			{% if user.is_superuser %}
+			<td>所属商铺</td>
+			{% elif user.is_staff %}
+			<td>商品描述</td>
+			{% endif %}
+			<td>价格</td>
+			<td>功能</td>
+		</tr>
+        {% for product in products %}
+			<tr>
+				<td width="40px">
+					<a href="{{ product.get_url }}">
+                        {% if product.img %}
+						<img src="{{ product.img.url }}" alt="{{ item.it_name }}" width="30" height="30" />
+                        {% else %}
+						<img src="{{ product.img_url }}" alt="{{ item.it_name }}" width="30" height="30" />
+                        {% endif %}
+					</a>
+				</td>
+				<td width="150px">
+					<a href="{{ product.get_url }}">{{ product.it_name }}</a>
+				</td>
+			<td width="100px">
+			{% if user.is_superuser %}
+				<a href="{{ product.company.get_url }}" class="label label-info">{{ product.company }}</a>
+				{% elif user.is_staff %}
+				<p class="alert alert-info">{{ product.description }}</p>
+			{% endif %}
+			</td>
+				<td><span class="label label-important">{{ product.price }}</span>元</td>
+				<td width="100px" align="center">
+					<a href="{% url "update_product" product.id %}" class="btn-mini btn-primary">编辑</a>
+					<a href="{% url "delete_product" product.id %}" class="btn-mini btn-danger" onClick="{if(confirm('确定要删除 『{{ product.it_name }} 』 吗?\n')){return true;}return false;}">删除</a>
+				</td>
+			</tr>
+        {% endfor %}
+    </table>
+	{% paginate %}
+    </div>
+{% endblock %}

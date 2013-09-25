@@ -1,0 +1,170 @@
+{% extends "base-admin.html" %}
+{% block title %}管理商户{% endblock %}
+{% block main %}
+
+{% load pagination_tags %}
+
+<h2>管理用户</h2>
+    <a href="{% url 'create_user' 2 %}">创建普通用户</a>
+    <a href="{% url 'create_user' 1 %}">创建商户</a>
+    <a href="{% url 'create_user' 3 %}">创建管理员</a>
+<hr>
+
+<div class="row-fluid">
+  <div class="span8">
+    <div class="tabbable" id="tabs-943920">
+
+      <ul class="nav nav-tabs" id="myTab">
+        <li class="active">
+        <a data-toggle="tab" href="#custom">普通用户</a>
+        </li>
+        <li>
+        <a data-toggle="tab" href="#pre_store">待通过的商户</a>
+        </li>
+        <li>
+        <a data-toggle="tab" href="#store">商户</a>
+        </li>
+        <li>
+        <a data-toggle="tab" href="#admin">管理员</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="custom">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>姓名</th>
+                <th>账户类型</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            {% autopaginate custom 20 %}
+            <tbody>
+              {% if custom %}
+              {% for foo in custom %}
+              <tr>
+                <td>{{ foo.id }}</td>
+                <td>{{ foo | truncatechars:9 }}</td>
+                <td>{{ foo.first_name }}</td>
+                <td><span class="badge badge-success">普通用户</span></td>
+                <td>
+                  <i><a href="{% url 'update_user' foo.id %}" class="icon-edit"></a></i>
+                  <i><a href="{% url 'delete_user' foo.id %}" class="icon-remove"></a></i>
+                </td>
+              </tr>
+              {% endfor %}
+              {% endif %}
+            </tbody>
+          </table>
+          {% paginate %}
+        </div>
+        {# custom           #}
+
+        <div class="tab-pane" id="pre_store">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>姓名</th>
+                <th>账户类型</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if pre_store %}
+              {% for foo in pre_store %}
+              <tr>
+                <td>{{ foo.id }}</td>
+                <td>{{ foo | truncatechars:9 }}</td>
+                <td>{{ foo.first_name }}</td>
+                <td><span class="badge badge-inverse">待通过</span></td>
+                <td>
+                  <a href="{% url 'pass_user' foo.id %}" class="btn btn-small btn-primary">通过</a></i>
+                <a href="{% url 'delete_user' foo.id %}" class="btn btn-small btn-danger">删除</a>
+              </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+      {# pre_store #}
+
+      <div class="tab-pane" id="store">
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>用户名</th>
+              <th>姓名</th>
+              <th>账户类型</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if store_user %}
+            {% for foo in store_user %}
+            <tr>
+              <td>{{ foo.id }}</td>
+              <td><a href="{{ foo.stores.get_url }}">{{ foo | truncatechars:9 }}</a></td>
+              <td>{{ foo.first_name }}</td>
+              <td><span class="badge badge-info">商户</span></td>
+              <td>
+                <i><a href="{% url 'update_user' foo.id %}" class="icon-edit"></a></i>
+                <i><a href="{% url 'delete_user' foo.id %}" class="icon-remove"></a></i>
+              </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane" id="admin">
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>用户名</th>
+              <th>姓名</th>
+              <th>账户类型</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if super_user %}
+            {% for foo in super_user %}
+            <tr>
+              <td>{{ foo.id }}</td>
+              <td>{{ foo | truncatechars:9 }}</td>
+              <td>{{ foo.first_name }}</td>
+              <td><span class="badge badge-important">管理员</span></td>
+              <td></td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="span4">
+</div>
+</div>
+
+{% comment %}<script>
+  $(function () {
+    $('#myTab a:last').tab('show');
+  })
+</script>{% endcomment %}
+
+
+{% endblock %}

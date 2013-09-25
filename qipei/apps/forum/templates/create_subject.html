@@ -1,0 +1,33 @@
+{% extends 'base-forum.html' %}
+
+
+{% block title %}
+创建主题
+{% endblock %}
+
+{% block head %}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+
+<div class="pageTab ">
+  <span class="right"><a href="{% url 'list_subject' %}" class="backToList ft12">◁返回列表</a></span>
+</div>
+
+{% if form %}
+    <form method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    {% include 'form_bootstrap.html' %}
+    <br>
+    <input type="submit" value="提交"/>
+    <input type="reset" value="重填"/>
+    </form>
+
+{% endif %}
+
+
+
+{% endblock %}

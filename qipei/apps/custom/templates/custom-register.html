@@ -1,0 +1,52 @@
+{% extends 'base-index.html' %}
+
+{% block title %}
+用户注册
+{% endblock %}
+
+{% block content %}
+
+<div id="breadcrumb" class="bread grid grid-20">
+  <a class="bread-cell" href="/">汽配商城</a> &gt;
+  <span class="bread-cell bread-cell-current">登录</span>
+</div> <!-- .bread -->
+
+<div id="content" class="grid grid-6" >
+  <div class="form">
+
+    <form action="" method="POST" class="form">
+      {% csrf_token %}
+      <table class="table" style="margin-top:25px;text-align:center;" cellpadding="19">
+        {% for field in form %}
+            <tr>
+                <td><label for="{{ field.id_for_label }}" class='grid grid-2 '>
+                        <b>{{ field.label }}</b>
+                    </label>
+                </td>
+                <td>
+                    <input class="form-input grid grid-5"  name='{{ field.name }}'
+                           type="{% if field.name == 'password' or field.name == 're_password' %}password{% else %}text{% endif %}" />
+                </td>
+            </tr>
+            {% if field.errors%}
+                <tr>
+                    <td colspan="2"><span class="tag tag-red">{{ field.errors }}</span></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+
+
+        <tr>
+          <td style='float:right;' >
+            <input type='reset' class="button button-grey" value='重填'/>
+          </td>
+          <td>
+            <input type="submit" value="注册"  class="button button-green"/>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

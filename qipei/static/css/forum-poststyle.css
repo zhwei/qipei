@@ -1,0 +1,114 @@
+@charset:utf-8;
+/*回复与返回栏*/
+.adjust{margin-right: 4px;}
+.backToList{
+	padding:6px;
+	line-height: 33px;
+	border: 1px solid #CDCDCD; 
+}
+
+.backToList:hover{color:#0033FF;}
+/*帖子内容区*/
+.lflist{
+	width:160px;
+	background: #E5EDF2;
+	border-right: 1px solid #c2d5e3;
+}
+.rglist{
+	background: #fff;
+}
+#postList{
+	margin-bottom: 10px;
+	border: 1px solid #CDCDCD; 
+}
+td{
+	vertical-align:top;
+	border-bottom: 4px solid #C2D5E3;
+}
+
+#postHeader #postState{
+	line-height: 44px;
+	padding-left: 10px;
+}
+#postHeader #postTitle{
+	padding:0 20px;
+	line-height: 40px;
+}
+#postHeader #postTitle h1{float: left;font-size: 16px;}
+/*帖子左侧*/
+
+.authorInf span.authorName{
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 18px;
+	border-bottom:1px dashed #CDCDCD ;
+}
+.authorInf span.grade{
+	display: block;
+	margin-top: 10px;
+	padding-left: 18px;
+}
+.authorInf span.grade p{
+	padding: 4px;
+}
+.authorInf  img.avatar{
+	width:120px;
+	height: 95px;
+	margin-top: 10px;
+	margin-left: 18px;
+}
+.authorInf ul{
+	height: 40px;
+	margin-top:10px;
+	padding-left: 18px;
+}
+.authorInf ul li{
+	float:left;
+	line-height: 20px;
+	list-style:none;
+	margin-right: 10px;
+
+}
+.authorInf #linkHim li{
+	width:60px;
+}
+/*帖子右侧*/
+.postInf .authi{
+	width: 98%;
+	height: 30px;
+	margin: 0 auto;
+	line-height:30px;
+	border-bottom: 1px dashed #CDCDCD;
+}
+.authi span#postPath {display: block;margin-right:10px;}
+.authi span#postPath strong a{
+	font-weight: 400;
+}
+.postInf .text{
+	width: 98%;
+	height: 500px;
+	margin: 0 auto;
+	/*background:#ccc;*/
+}
+.postInf #shareTo{
+	height: 20px;
+	margin:10px 15px;
+}
+.postInf .evaluate{
+	width: 98%;
+	height: 30px;
+	margin: 0 auto;
+	line-height: 30px;
+	border-top:1px dashed #CDCDCD;
+}
+.evaluate span a{padding:10px;}
+/*快速回复*/
+#userAvatar{
+	margin-top: 25px;
+	margin-left: 14px;
+}
+#editArea{
+	width: 85%;
+	height:128px;
+}

@@ -1,0 +1,16 @@
+{% extends "base-admin.html" %}
+{% block title %}网站管理页面{% endblock %}
+
+{% block main %}
+<h2>
+  {% if user.is_superuser %}
+  管理员
+  {% else %}
+  商户
+  {% endif %}
+  {{ user.username }}您好！
+</h2>
+<hr>
+<p>这里是汽配商城网站后台管理页，请谨慎操作。</p>
+<p><a class="btn btn-primary btn-large">了解更多 &raquo;</a></p>
+{% endblock %}

@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta content="汽配，汽车配件，汽配网，汽配企业，汽配城"name="keywords">
+    <meta content="淄博社区网，专业的汽配论坛网站，鲁中地区最大的汽车配件、装具专业市场"name="description">
+    <meta name="author" content="theone">
+    {% block head %}
+
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="/static/css/forum-index.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/forum-base.css">
+    <script type="text/javascript" href=""></script>
+  </head>
+  <body>
+    <!-- 页首 -->
+    <div id="header">
+      <div id="nav">
+        <ul class="left">
+          <li><a href="{% url 'index' %}" class="ft16">首页</a></li>
+          <li><a href="/wel/classfiy/0.html" class="ft16">商品供应</a></li>
+          <li><a href="{% url 'needs_list' %}" class="ft16">需求市场</a></li>
+          <li><a href="#" class="ft16">社区</a></li>
+          <li><a href="{% url 'comment_online' %}" class="ft16">在线留言</a></li>
+        </ul>
+        <ul class="right">
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'custom_page' %}" class="ft14">{{ request.user.username }}</a></li>
+                <li><a href="{% url 'custom_notify' %}" class="ft14">消息</a></li>
+                <li><a href="{% url 'logout' %}" class="ft14">退出</a></li>
+            {% else %}
+                <li><a href="{% url 'custom_login' %}" class="ft14">登录</a></li>
+            {% endif %}
+
+        </ul>
+      </div>
+    </div>
+    <!-- 页中 -->
+    <div id="content">
+
+        {% block content %}
+        
+        {% endblock %}
+
+    </div>
+    <!-- 页尾 -->
+    <div id="footer">
+      <div id="nav">
+        <ul class="left">
+          <li><a href="" class="ft12">关于我们</a></li>
+          <li><a href="" class="ft12">广告服务</a></li>
+          <li><a href="" class="ft12">免责声明</a></li>
+          <li><a href="" class="ft12">版权隐私</a></li>
+          <li><a href="" class="ft12">联系我们</a></li>
+        </ul>
+        <p class="right ft12">
+        Copyright © 2013 All Rights Reserved
+        </p>
+      </div>
+    </div>
+
+    <!-- 返回顶部  -->
+    <div style="display:none;" class="back-to" id="toolBackTop">
+      <a title="返回顶部" onclick="window.scrollTo(0,0);return false;" href="#top" class="back-top">返回顶部</a>
+    </div>
+    <script src="scripts/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+          var bt = $('#toolBackTop');
+          var sw = $(document.body)[0].clientWidth;
+
+          var limitsw = (sw - 840) / 2 - 80;
+          if (limitsw > 0){
+          limitsw = parseInt(limitsw);
+          bt.css("right",limitsw);
+          }
+
+          $(window).scroll(function() {
+            var st = $(window).scrollTop();
+            if(st > 30){
+            bt.show();
+            }else{
+            bt.hide();
+            }
+            });
+          })
+</script>
+<!-- 返回顶部 -->
+      </body>
+    </html>

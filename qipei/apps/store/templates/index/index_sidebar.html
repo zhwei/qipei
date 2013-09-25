@@ -1,0 +1,88 @@
+<div id="gridlist" class="grid grid-20">
+  <div id="aside-left" class="grid grid-5 first clearfix">
+
+    <div class="aside">
+      <div class="aside-box">
+        <a href="#" class="store-logo">
+          {% if store.logo %}
+          <img src="{{ store.logo.url }}" alt="{{ store.name }}" />
+          {% else %}
+          <img src="/static/img/defaultlogo.jpg" alt="" />
+          {% endif %}
+        </a>
+        <h4><a rel="nofollow" href="{{ store.get_url }}">{{ store.name }}</a></h4>
+        <br>
+
+      {% if user.is_superuser %}
+
+        <div class="aside-box" >
+            <a class="button button-icon" href="{% url 'update_store' store.id %}">
+                <span class="icon icon-doc">#</span> 修改商铺信息
+            </a>
+        </div>
+
+      {% elif user.is_staff and user.id == store.boss.id %}
+        <div class="aside-box" >
+            <a class="button button-icon" href="{% url 'update_self_store' %}">
+                <span class="icon icon-doc">#</span> 修改我的店铺
+            </a>
+        </div>
+
+      {% elif user.is_staff %}
+      {% else %}
+
+        <div class="aside-box" >
+            <a class="button button-icon" href="{% url 'mark_store' store.id %}">
+                <span class="icon icon-star">#</span> 收藏
+            </a>
+            <a class="button button-icon" href="###">
+                <span class="icon icon-comment">#</span> 留言
+            </a>
+            <a class="button button-icon" href="###">
+                <span class="icon icon-flag">#</span> 举报
+            </a>
+        </div>
+
+      {% endif %}
+
+        <ul class="store-info">
+          <li>商户姓名: {{ store.first_name|default:'未填写真实姓名' }}</li>
+          <li>注册日期: {{ store.boss.date_joined|date:'Y年m月d日' }}</li>
+        </ul>
+
+        <ul class="store-verify">
+          <li>
+          <a href="###" class="icon icon-phone icon-phone-done">手机认证</a> {{ store.tel|default:'未填写联系电话' }} -> 已验证
+          </li>
+          <li><a href="###" class="icon icon-trade icon-trade-done">营业执照认证</a> 营业执照 -> 已验证</li>
+        </ul>
+      </div> <!-- .aside-box -->
+
+      <div class="aside-box">
+        <h4 class="typo-h4">快捷功能</h4>
+        <a href="#">查看需求</a>
+      </div>
+
+      <div class="aside-box">					
+        <h4 class="typo-h4">置顶推广</h4>
+        <p>
+        获得6倍于普通信息的效果，始终出现在列表页面的最顶部。<br>
+        <a class="aside-box-higher" href="">了解更多</a>
+        </p>
+      </div>
+
+      <div class="aside-box">
+        <h4 class="typo-h4">友情提醒</h4>
+        只有接单后才能查看用户的详细信息!
+      </div>
+
+      <div class="aside-box aside-box-noborder">
+        <h4 class="typo-h4">小调查</h4>
+        您对汽配商城满意吗？<br />
+        <p class="aside-box-higher">
+        <a href="＃">满意</a> <a href="＃">不满意</a>
+        </p>
+      </div>
+
+    </div> <!-- .aside -->
+  </div> <!-- #aside -->

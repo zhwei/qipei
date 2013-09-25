@@ -1,0 +1,17 @@
+{% extends "base-admin.html" %}
+{% block title %}修改商铺广告{% endblock %}
+{% block main %}
+    <h2>修改商铺广告</h2>
+    <hr>
+    <form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+
+        {% include 'form_bootstrap.html' %}
+
+        <br>
+        <div class="control-group" align="center">
+            <div class="btn-group">
+                <input type="submit"  class="btn btn-primary" value="修改"/>
+            </div>
+        </div>
+    </form>
+{% endblock %}

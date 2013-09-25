@@ -1,0 +1,19 @@
+{% extends "base-admin.html" %}
+{% block title %}友情链接管理|添加{% endblock %}
+{% block main %}
+    <h3>友情链接管理&nbsp;|&nbsp;添加</h3>
+    <hr>
+    <h4>添加链接</h4>
+    <form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+        <table border="0" cellpadding="0" >
+            {{ form.as_p }}
+        </table>
+        <br>
+            <div class="btn-group">
+                <input type="submit"  class="btn btn-primary" value="添加"/>
+            </div>
+            <div class="btn-group">
+                <a href="/goods/links/" class="btn">返回</a>
+            </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,44 @@
+<div id="aside" class="grid grid-5 last clearfix">
+  <a target="_blank" href=""><img  style="width:212px;height:122px;" src="/static/img/banner.jpg"></a>
+  <div class="aside">
+    <div class="aside-box">
+      <h4 class="typo-h4">热点类目</h4>
+      <p>
+      {% for sort in all_sorts %}
+      {% if forloop.counter|divisibleby:2 %}
+      <a href="{{ sort.get_url }}" target="_blank">{{ sort.name }}</a>
+      <br>
+      {% else %}
+      <a href="{{ sort.get_url }}" target="_blank">{{ sort.name }}</a>      |
+      {% endif %}
+      {% endfor %}
+      </p>
+    </div> <!-- .aside-box -->
+
+    <div class="aside-box">
+      <h4 class="typo-h4">快速发布</h4>
+      <a href="{% url 'create_need' %}">免费发布车辆买卖信息</a>
+    </div>
+
+    <div class="aside-box">
+      <h4 class="typo-h4">置顶推广</h4>
+      <p>
+      <a class="aside-box-higher" href="{% url 'about_us' %}">了解更多</a>
+      </p>
+    </div>
+
+    <div class="aside-box">
+      <h4 class="typo-h4">友情提醒</h4>
+      不要提前转账或汇款！
+    </div>
+
+    <div class="aside-box aside-box-noborder">
+      <h4 class="typo-h4">小调查</h4>
+      您对车辆买卖类目满意吗？<br />
+      <p class="aside-box-higher">
+      <a href="">满意</a> <a href="">不满意</a>
+      </p>
+    </div>
+
+  </div> <!-- .aside -->
+</div> <!-- #aside -->

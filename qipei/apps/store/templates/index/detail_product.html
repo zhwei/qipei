@@ -1,0 +1,115 @@
+{% extends "base-welcome.html" %}
+{% block title %}
+{{ store.name }}的店铺 -- 汽配商城
+{% endblock title %}
+
+{% load pagination_tags %}
+
+{% block content %}
+
+<style type="text/css">
+  .first{
+    font-weight:bold;
+  }
+
+</style>
+
+<div id="breadcrumb" class="bread grid grid-20">
+  <a class="bread-cell" href="/">汽配商城</a> &gt; 
+  <a class="bread-cell" href="{{ store.get_url }}">商家首页</a> &gt; 
+  <span class="bread-cell bread-cell-current">{{ store.name }}的产品<cite class="bread-cell-cite">（6262条信息）</cite></span>
+</div> <!-- .bread -->
+
+{% include "index/index_sidebar.html" %}
+
+<br />
+<div id="content" class="grid grid-15 last viewad">
+  <div class="viewad-info clearfix">
+    <table class="table">
+      <tr>
+        <td class="first">商品名称</td>
+        <td><strong>{{ product.it_name }}</strong></td>
+      </tr>
+      <tr>
+        <td class="first">分类</td>
+        <td>
+          {% for s in  product.sort.all %}
+          <a class="tag tag-blue">{{ s.name }}</a>
+          {% endfor %}
+        </td>
+      </tr>
+      <tr>
+        <td class="first">品牌</td>
+        <td>{{ product.brand }}</td>
+      </tr>
+      <tr>
+        <td class="first">价格</td>
+        <td>{{ product.price }}</td>
+      </tr>
+      <tr>
+        <td class="first">其他参数</td>
+        <td>{{ product.version|safe }}</td>
+      </tr>
+      <tr>
+        <td class="first">描述</td>
+        <td>{{ product.description|safe }}</td>
+      </tr>
+      <tr>
+        <td class="first">生产日期</td>
+        <td>{{ product.exit_date }}</td>
+      {% if user.is_superuser %}
+          <tr>
+              <td class="first">操作</td>
+            <td>
+                <a href="{% url 'update_product' product.id %}">xiugaishangpin</a>
+                <a href="{% url 'delete_product' product.id %}">shanchu</a>
+            </td>
+          </tr>
+      {% elif user.is_staff %}
+          <tr>
+              <td class="first">操作</td>
+              <td>
+                  <a href="{% url 'update_product' product.id %}">xiugaishangpin</a>
+                  <a href="{% url 'delete_product' product.id %}">shanchu_ sahnghu</a>
+              </td>
+          </tr>
+      {% else %}
+        <tr>
+            <td class="first">操作</td>
+            <td>
+                <a class="button button-icon" href="{% url 'mark_product' product.id %}">
+                    <span class="icon icon-star">#</span> 收藏商品
+                </a>
+                <a class="button button-icon" href="###">
+                    <span class="icon icon-comment">#</span> 留言
+                </a>
+                <a class="button button-icon" href="###">
+                    <span class="icon icon-flag">#</span> 虚假信息举报
+                </a>
+            </td>
+        </tr>
+      {% endif %}
+        <tr>
+        <td class="first">图片</td>
+        <td>
+            {% if product.img %}
+            <a href="{{ product.img.url }}" target="_blank">
+                <img width="500" src="{{ product.img.url }}" alt="" />
+            </a>
+            {% else %}
+            <a href="{{ product.img_url }}" target="_blank">
+                <img width="500" src="{{ product.img_url }}" alt="" />
+            </a>
+            {% endif %}
+
+        </td>
+      </tr>
+
+    </table>
+  </div>
+
+</div> <!-- #content -->
+
+</div> <!-- #gridlist -->
+
+{% endblock content %}

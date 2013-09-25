@@ -1,0 +1,34 @@
+<ul class="nav nav-list">
+    {% block function %}
+    {% if user.is_superuser %}
+
+        <li class="nav-header">管理员功能区</li>
+
+        <li><a href="{% url 'list_user' %}">管理用户</a></li>
+        <li><a href="{% url 'list_store' %}">管理商铺</a></li>
+
+        <li><a href="{% url 'create_notify' %}">创建通知</a></li>
+        {# <li><a href="{% url 'create_store' %}">添加商铺</a></li>#}
+        <li><a href="{% url 'list_product' %}">商品管理</a></li>
+        <li><a href="{% url 'create_product' %}">增加商品</a></li>
+        <li><a href="{% url 'list_sort' %}">分类管理</a></li>
+        {#<li><a href="{% url 'add_brand' %}">品牌管理</a></li>#}
+        {# <li><a href="{% url 'list_store_ad' %}">网站广告管理</a></li> #}
+        <li><a href="{% url 'list_link' %}">友情链接管理</a></li>
+        <li><a href="{% url 'admin_need_list' %}">需求市场管理</a></li>
+
+        <hr>
+    {% elif user.is_staff %}
+        <li class="nav-header">普通商户功能区</li>
+
+        <li><a href="{% url 'list_product' %}">商品管理</a></li>
+        <li><a href="{% url 'create_self_product' %}">增加商品</a></li>
+        <li><a href="{% url 'detail_self_store' %}">商铺信息</a></li>
+        <li><a href="{% url 'update_store_ad' %}">修改商铺广告</a></li>
+        <hr>
+
+    {% endif %}
+        <li class="nav-header">用户信息功能区</li>
+        <li><a href="{% url 'changepw' %}">修改登录密码</a></li>
+    {% endblock %}
+  </ul>

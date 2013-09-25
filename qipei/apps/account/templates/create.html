@@ -1,0 +1,26 @@
+{% extends "base-admin.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% if form.media %}
+    {% block head %}
+        {{ form.media }}
+    {% endblock %}
+{% endif %}
+
+{% block main %}
+    <h3>{{ title }}</h3>
+    <hr>
+    <form method="post">{% csrf_token %}
+
+        {% include 'form_bootstrap.html' %}
+
+        <div class="control-group">
+            <div class="btn-group">
+                <a onclick="location.replace(document.referrer);" class="btn">返回</a>
+            </div>
+            <div class="btn-group">
+                <input type="submit"  class="btn btn-primary" value="提交"/>
+            </div>
+        </div>
+    </form>
+{% endblock %}

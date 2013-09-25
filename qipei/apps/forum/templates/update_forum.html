@@ -1,0 +1,20 @@
+<head>
+
+    {{ form.media }}
+</head>
+
+
+<form action="" method="POSR">
+
+    {% csrf_token %}
+
+    {% include 'form_bootstrap.html' %}
+
+    <input type="submit" value="提交"/>
+    {% if subject_instance %}
+    <a href="{% url 'detail_subject' subject_instance.id %}">back</a>
+    {% else %}
+    <a href="{% url 'detail_subject' reply_instance.subject_id %}">back</a>
+    {% endif %}
+
+</form>

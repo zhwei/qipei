@@ -1,0 +1,36 @@
+{% extends "base-admin.html" %}
+{% block title %}添加商品{% endblock %}
+
+{% block jq %}
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+{% endblock %}
+
+{% block head %}
+{{ form.media }}
+<link rel="stylesheet" href="/static/css/datetimepicker.css"/>
+<script type="text/javascript" src="/static/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/static/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+{% endblock %}
+
+{% block main %}
+    <h2>添加商品</h2>
+    <hr>
+    <form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+        <table border="0" cellpadding="0" >
+            {% include 'form_bootstrap.html' %}
+        </table>
+        <br>
+        <div class="control-group" align="center">
+            <div class="btn-group">
+                <input type="submit"  class="btn btn-primary" value="添加"/>
+            </div>
+        </div>
+    </form>
+
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        language:  'zh-CN'
+    });
+</script>
+{% endblock %}

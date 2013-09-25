@@ -1,0 +1,185 @@
+{% extends 'base-forum.html' %}
+
+{% block title %}
+回复 {{ subject.title }}
+{% endblock %}
+
+{% block head %}
+{{ form.media }}
+<link rel="stylesheet" type="text/css" href="/static/css/forum-poststyle.css">
+{% endblock %}
+
+{% block content %}
+<!-- 回复与返回栏 -->
+    <div class="pageTab ">
+        <a href="{% url 'create_subject' %}"><img src="/static/img/forum/pn_post.png" class="adjust"></a>
+        <a href="#reply"><img src="/static/img/forum/pn_reply.png"></a>
+      <span class="right"><a href="{% url 'list_subject' %}" class="backToList ft12">◁返回列表</a></span>
+    </div>
+    <hr />
+
+    <!-- 帖子内容区 -->
+    <div id="postList">
+      <div id="postHeader">
+        <table cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td class="lflist ft12">
+                <div id="postState">
+                  <span>查看:</span>
+                  <span class="redColor">2100</span>
+                  <span class="pipe">|</span>
+                  <span>回复:</span>
+                  <span class="redColor">200</span>
+                </div>
+              </td>
+              <td class="rglist">
+                <div id="postTitle">
+                  <h1>{{ subject.title }}</h1>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="postContent">
+        <table cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td class="lflist ft12">
+                <div class="authorInf">
+                  <span  class="ft16 bold authorName"><a href="">{{ subject.user.username }}</a></span>
+                  {% if user.custom.avatar_name %}
+                    <img src="{{ user.custom.get_avatar_large }}" alt="{{ user.name }}" class="avatar" />
+                  {% else %}
+                    <img src="/static/img/defaultavatar.jpg" alt="默认头像" />
+                  {% endif %}
+                  <ul>
+                    <li>
+                      <p><a href="">{{ user.subject_set.count }}</a></p>主题
+                    </li>
+                    <li>
+                      <p><a href="">{{ user.reply_set.count|default:0 }}</a></p>帖子
+                    </li>
+                    <li>
+                      <p><a href="">6666</a></p>积分
+                    </li>
+                  </ul>
+                  <span class="grade">
+                    {% if user.is_superuser %}
+                    <p><a href="">管理员</a></p>
+                    {% endif %}
+                  </span>
+
+                </div>
+              </td>
+              <td class="rglist">
+                <div class="postInf">
+                  <div class="authi">
+                    发表于 {{ subject.create_date }}
+                  </div>
+                  <div class="text">
+                      <br>
+                      {{ subject.content|safe }}
+                  </div>
+                  <div class="clear"></div>
+                  <div class="evaluate">
+                    <img src="/static/img/forum/fastreply.gif"alt="回复" title="回复" class="vm">
+                    <a href="#reply">回复</a>
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    {% for reply in replys %}
+      <div class="postContent">
+        <table cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td class="lflist ft12">
+                <div class="authorInf">
+
+                  <span class="authorName ft16 bold"><a href="">{{ user.username }}</a></span>
+                  {% if custom.avatar_name %}
+                    <img src="{{ custom.get_avatar_large }}" alt="{{ user.username }}" />
+                  {% else %}
+                    <img src="/static/img/defaultavatar.jpg" alt="默认头像" />
+                  {% endif %}
+                  <ul>
+                    <li>
+                      <p><a href="">{{ reply.user.subject_set.count }}</a></p>主题
+                    </li>
+                    <li>
+                      <p><a href="">{{ reply.user.reply_set.count }}</a></p>帖子
+                    </li>
+                    <li>
+                      <p><a href="">666</a></p>积分
+                    </li>
+                  </ul>
+                  <span class="grade">
+                    <p>积分：<a href="">666</a></p>
+                  </span>
+                </div>
+              </td>
+              <td class="rglist">
+                <div class="postInf">
+                  <div class="authi">
+                    <span>{{ forloop.counter }}楼</span> 发表于 {{ reply.create_date }}
+                    <span class="pipe">|</span>
+                  </div>
+                  <div class="text">
+                      <br>
+                      {{ reply.content|safe }}
+                  </div>
+
+                  <div class="evaluate">
+                    <img src="/static/img/forum/fastreply.gif"alt="回复" title="回复" class="vm">
+                    <a href="#reply">回复</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+       {% endfor %}
+    </div>
+        <!-- 快速回复 -->
+    <div id="fastPost">
+      <p class="bm_h ft12" id="reply">快速回复</p>
+      <div class="bm_c">
+        <table>
+          <tbody>
+            <tr>
+              <td  class="lflist">
+                <div id="userAvatar">
+                  {% if user.custom.avatar_name %}
+                    <img src="{{ user.custom.get_avatar_large }}" alt="{{ user.username }}" />
+                  {% else %}
+                    <img src="/static/img/defaultavatar.jpg" alt="默认头像" />
+                  {% endif %}
+                </div>
+              </td>
+              <td  class="rglist">
+                <div id="postArea">
+                    <form method="POST"  enctype="multipart/form-data">
+                      <div id="editArea">
+                        {% csrf_token %}
+                        {% include 'form_bootstrap.html' %}
+                      </div>
+                      <button type="submit" name="topicsubmit" id="fastPostSubmit" value="topicsubmit" tabindex="13" class="pnc"><strong>发表帖子</strong></button>
+                      </form>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+{% endblock %}

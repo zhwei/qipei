@@ -1,0 +1,27 @@
+{% extends "base-admin.html" %}
+{% block title %}添加分类{% endblock %}
+{% block main %}
+    <div>
+        <h3>全部分类</h3>
+        <div>
+            {% load mptt_tags %}
+            <ul>
+                {% recursetree nodes %}
+                    <li class="category-list">
+                        <a href="#" class="label label-success">{{ node.name }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="{% url 'create_sort' node.id %}" class="btn-mini btn-info">添加子分类</a>
+                            <a href="{% url 'delete_sort' node.id %}" class="btn-mini btn-danger" >删除</a>
+                        {% if not node.is_leaf_node %}
+                            <ul class="children">
+                                {{ children }}
+                                <hr>
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endrecursetree %}
+                <br>
+                <a href="create/root/" class="btn btn-primary">添加根分类</a>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

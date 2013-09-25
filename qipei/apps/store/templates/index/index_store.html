@@ -1,0 +1,93 @@
+{% extends "base-welcome.html" %}
+{% block title %}
+{{ store.name }}的店铺 -- 汽配商城
+{% endblock title %}
+
+{% load pagination_tags %}
+
+{% block content %}
+
+<div id="breadcrumb" class="bread grid grid-20">
+  <a class="bread-cell" href="/">汽配商城</a> &gt; 
+  <a class="bread-cell" href="{{ store.get_url }}">商家首页</a> &gt; 
+  <span class="bread-cell bread-cell-current">{{ store.name }}的首页<cite class="bread-cell-cite">（6262条信息）</cite></span>
+</div> <!-- .bread -->
+
+{% include "index/index_sidebar.html" %}
+
+<div id="content" class="grid grid-15 last viewad">
+
+  <h2 class="viewad-title viewad-title-nometa">
+    {% if sotre.loc %}
+    <img src="{{ store.loc.url }}" alt="" />		
+    {% else %}
+    <img src="/static/img/defaultlogo.jpg" alt="" />		
+    {% endif %}
+  </h2>
+  <h2 class="viewad-title viewad-title-nometa">{{ store.name }}</h2>
+
+  <div class="viewad-entry typo">
+    <p>
+    {{ store.info }}
+    </p>
+  </div> <!-- .viewad-entry -->
+
+  <div class="tab">
+    <ul class="tab-title clearfix">
+      <li class="tab-title-item tab-title-item active">
+      <a href="#products" data-toggle="tab">所有产品</a>
+      </li>
+      <li class="tab-title-item tab-title-item">
+      <a href="#tab2" data-toggle="tab">tab2</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="tab-content">
+    <div class="tab-content-pane active" id="products">
+      <ul class="list list-thumb">
+        <li class="list-item list-item-title clearfix">
+        <span class="list-item-block">图片</span>
+        <div class="list-item-block">内容</div>
+        <span class="list-item-block">价钱</span>
+        <span class="list-item-block">时间</span>
+        </li>
+
+        {% autopaginate products 5 %}
+
+        {% for product in products %} 
+
+        <li class="list-item clearfix list-item-hover"> <span class="list-item-block">
+          <img src="{{ product.img_url }}" />
+        </span>
+        <div class="list-item-content">
+          <a href="{{ product.get_url }}" class="topicLink" target="_blank"><strong>{{ product.it_name }}</strong></a>
+          {% for t in product.sort.all %}
+          <a class="tag tag-blue" href="#">{{ t.name }}</a>
+          {% endfor %}
+{#          <div class="tips clearfix">#}
+{#            <span class="tips-angle diamond"></span>#}
+{#            <p class="tips-text">{{ product.description }}</p>#}
+{#          </div>#}
+        </div>
+        <span class="list-item-block"><cite>{{ product.price }}</cite> 元</span>
+        <span class="list-item-block">{{ product.exit_date }}</span>
+        </li>
+        {% endfor %}
+
+      </ul> <!-- .list -->
+
+      <div class="pagenav clearfix">
+        {% paginate %}
+      </div>
+    </div> <!--products-->
+    <div class="tab-content-pane" id="tab2">
+      <p>asdf</p>
+    </div>
+  </div>
+
+</div> <!-- #content -->
+
+</div> <!-- #gridlist -->
+
+{% endblock content %}

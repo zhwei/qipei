@@ -1,0 +1,38 @@
+{% extends "base-index.html" %}
+
+{% block title %}{% block custom-title %}{% endblock %}{% endblock title %}
+
+{% load pagination_tags %}
+
+{% block head %}
+    {% block custom-head %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<div id="breadcrumb" class="bread grid grid-20">
+  <a class="bread-cell" href="/">汽配商城</a> &gt;
+  <a class="bread-cell" href="{% url 'custom_page' %}">个人信息中心</a> &gt;
+  <span class="bread-cell bread-cell-current">{{ user.username }}的信息<cite class="bread-cell-cite">（仅个人可见）</cite></span>
+</div> <!-- .bread -->
+
+{% include "custom-sidebar.html" %}
+
+<div id="content" class="grid grid-15 last viewad">
+
+  <h2 class="viewad-title viewad-title-nometa">
+  </h2>
+  <h2 class="viewad-title viewad-title-nometa">{{ user.username }}</h2>
+
+
+      {% block custom-content %}
+      
+      {% endblock %}
+
+</div> <!-- #content -->
+
+<script type="text/javascript">
+  $('.qx').popover();
+  </script>
+
+{% endblock content %}

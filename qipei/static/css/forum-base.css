@@ -1,0 +1,219 @@
+@charset:utf-8;
+/*公共css设置*/
+body,div,h1,h2,h3,h4,h5,h6,p,ul,li,table,tbody,th,tr,td,img,a,input,textarea,span{
+	margin:0;
+	padding:0;
+	font-family:verdana,Microsoft YaHei,Tahoma,sans-serif;
+}
+body{font-size: 14px;}
+h1, h2, h3, h4, h5, h6 {
+	font-size: 1em;
+}
+.redColor{color:#f60;}
+.blueColor{color:#369;}
+.clear{clear:both;}
+.left{float:left;}
+.right{float: right;}
+.ft12{font-size:12px;}
+.ft16{font-size: 16px;}
+.bold{font-weight: bold;}
+.vm{vertical-align:middle;}
+a{ color:#333;text-decoration: none;}
+a:hover{text-decoration:underline;color: #0033FF;}
+table{width:100%;text-align: left;}
+textarea,input{resize:none;outline: none;}
+
+/*Header*/
+#header,#footer{
+	border-left-width: 0px;
+	border-right-width:0px;
+	height:55px;
+	width:100%;
+	min-width: 1000px;
+	left:0px;
+	background:#333;
+}
+#header{
+	position:fixed;
+	top:0px;
+	z-index: 199;
+}
+#header a#logo{
+	display: block;
+	float: left;
+	width: 200px;
+	height: 40px;
+	margin-top:7px;
+	line-height: 40px;
+	background: #CDCDCD;
+}
+#nav{
+	margin:0px auto;
+	height:55px;
+}
+#nav ul{
+	margin: 0px auto;
+	height: 55px;
+}
+#nav ul li{
+	margin-right: 20px;
+	height:50px;
+	float:left;
+	list-style: none;
+}
+#nav ul li a {
+	display: block;
+	line-height: 50px;
+	text-align: center;
+	padding:0 10px;
+	color:#fff;
+}
+/*Content*/
+.bm_h {
+	padding: 0 10px;
+	/*height: 50px;*/
+	border-bottom: 1px solid #C2D5E3;
+	background: #F2F2F2;
+	line-height: 31px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+#content{
+	margin-top:75px;
+	width: 98%;
+	min-width: 1000px;
+	position:relative;
+	left: 12px;
+
+}
+.pageTab{
+	position:relative;
+	margin-bottom: 10px;
+	height:33px;
+}
+.pageTab img{float:left;}
+.pageTab ul{
+	margin: 0 0 0 auto;
+	height: 33px;
+
+}
+.pageTab ul li{
+	margin-right: 3px;
+	width: 50px;
+	height:30px;
+	float: left;
+	list-style: none;
+	border: 1px solid #C2D5E3;
+}
+.pageTab ul li a {
+	display: block;
+	line-height:26px;
+	text-align: center;
+	margin: 2px;
+	color:#555;
+}
+/*发帖 回复*/
+#fastPost{
+	border:1px solid #CDCDCD;
+}
+#fastPost p{font-weight: bold;}
+#postArea{padding:20px;}
+#title{margin-bottom:10px; zoom:1;}
+#smilies{margin-top:20px;}
+#smilies td {padding:4px;border: none;}
+#editArea{
+	zoom:1;
+	border:1px solid;
+	border-color:#999 #ccc #ccc #999;
+}
+#editArea span a{ display: block; padding: 4px;}
+#bar{
+	padding: 0 10px 0 0;
+	height: 25px;
+	line-height: 25px;
+	border-bottom: 1px solid #CDCDCD;
+	background: #F2F2F2;
+
+}
+#bar a{
+	float: left;
+	display:inline-block;
+	margin:2px 5px 0 10px;
+	width:20px;
+	height:21px;
+	text-indent: -9999px;
+	line-height: 20px;
+	overflow: hidden;
+	background:url(../images/editor.png) no-repeat scroll 0% 0% transparent;
+}
+.pipe{margin:0 5px;color:#ccc;}
+#bar a.fcode{background-position: 0 -241px;}
+#bar a.frun{background-position: -27px -241px;}
+#bar a.fblod{background-position: 0 0;}
+#bar a.fcolor{background-position:-60px 0;}
+#bar a.fimg{background-position: 0 -20px;}
+#bar a.flink{background-position: -40px -20px;}
+#bar a.fquote{background-position: -140px -20px;}
+#bar a.fsmilies{background-position: -20px -20px;}
+#bar a.faccessory{background-position: -90px -82px;}
+
+.textarea{
+	display: block; 
+	width:100%;
+	height: 102px;
+	border: none;
+}
+.pnc{
+	margin-top:10px;
+	height: 26px;
+	border:1px solid #999;
+	background:#e5e5e5 url(../images/pn.png)repeat-x 0 0;
+}
+ .pnc,a.pnc{
+ 	border-color: #235994;
+	background-color: #06C;
+ 	background-position: 0 -48px;
+ 	color: white !important;
+ }
+
+/*Footer*/
+#footer{position: relative;top:10px;;}
+#footer p {
+	margin-right:10px;
+	line-height: 55px;
+	color:#fff;
+	}
+#footer a{color: #fff;}
+#footer a#logo{
+	display: block;
+	float: left;
+	width: 200px;
+	height: 40px;
+	margin-top:7px;
+	line-height: 40px;
+	background: #CDCDCD;
+
+}
+
+/*返回顶部*/
+.back-to{
+	z-index: 999;
+	position: fixed;
+	width:110px;
+	bottom: 35px;
+	overflow: hidden;
+	right: 0;
+}
+
+.back-to .back-top{
+	text-indent: -9999em;
+	outline-style: none;
+	outline-width: 0;
+	width:50px;
+	display: block;
+	background: url(../images/back-top.png) no-repeat 0 0;
+	float: right;
+	height: 50px;
+	margin-left: 10px;
+}
+.back-to .back-top:hover{background-position: -50px 0;}

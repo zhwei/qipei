@@ -1,0 +1,23 @@
+{% for field in form %}
+    <tr>
+        <td><label for="{{ field.id_for_label }}" class='grid grid-2 '>
+                <b>{{ field.label }}</b>
+            </label>
+        </td>
+        <td>
+            {{ field }}
+        </td>
+    </tr>
+    {% if field.help_text %}
+        <tr>
+            <td colspan="2"><span class="tag">{{ field.help_text }}</span></td>
+        </tr>
+    {% endif %}
+    {% if field.errors%}
+        <tr>
+            <td colspan="2"><span class="tag tag-red">{{ field.errors }}</span></td>
+        </tr>
+    {% endif %}
+{% endfor %}
+
+{% comment %}放在表格中， 需要<table></table> {% endcomment %}

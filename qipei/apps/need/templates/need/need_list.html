@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+{% load pagination_tags %}
+
+{% block need_content %}
+<div class="grid grid-14">
+<div class="">
+	<a href={% url 'needs_list' %} class="bread-cell">需求市场</a> >
+</div>
+<ul class="list list-thumb">
+{% autopaginate needs 15 %}
+	{% for need in needs %}
+	<li class="list-item clearfix">
+		<span class="list-item-block">
+			<img src="http://tu.baixing.net/m/8dde045e2717c67ab3f894318c97d304_sq.jpg" />
+		</span>
+		<div class="list-item-content">
+			<a href= {% url 'need_detail' need.id %} class="topicLink" target="_blank">[{{need.car_type}}]&nbsp{{need.short_dsc}}</a>
+			<p class="list-item-content-meta">{{ need.long_dsc }}</p>
+		</div>
+        <span class="list-item-content-meta"" >{{ need.created_at | date:"Y年m月d日 H时i分" }}</span>
+	</li>
+	{% endfor %}
+</ul>
+{% paginate %}
+
+</div>
+
+<div class="grid grid-5 aside" style="margin-top:20px">
+    <div class='typo-h4' style="margin-left:90px">小贴士</div>
+    <div style="margin-left:20px; margin-right:20px;margin-bottom: 30px" >本页为需求列表页面,可以点击先面按钮发布需求.</p>
+    <br />
+    <a href="{% url 'create_need' %}" class="button button-green">免费发布需求</a>
+</div>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "base-index.html" %}
+
+{% block title %}
+商品供应--汽配商城
+{% endblock %}
+{% load pagination_tags %}
+
+{% block content %}
+	<div id="breadcrumb" class="bread grid grid-15">
+        <a class="bread-cell" href="/">汽配城</a> &gt; 
+		<a class="bread-cell" href="/wel/classfiy/0.html">商品供应</a> &gt; 
+		<span class="bread-cell bread-cell-current">共有<cite class="bread-cell-cite">{{ products.count }}</cite>件商品</span>
+    </div> <!-- .bread -->
+	
+	<div id="gridlist" class="grid grid-20">
+		<div id="content" class="grid grid-15 first">
+			<div id="filter">
+				<ul class="filter filter-intype clearfix">
+					{% for sort in sorts %}
+						<li class="filter-item">
+
+						<a href="{{ sort.get_url }}" class="filter-item-cap"><strong>{{ sort }}</strong></a>
+						<a href="{{ sort.get_url }}" class="filter-item-cap"><strong>{{ sort }}</strong></a>
+						{% for child in sort.get_children %}
+							<a href="{{ child.get_url }}" class="button button-filter">{{ child }}</a>
+						{% endfor %}
+						</li>
+					{% endfor %}
+				</ul> <!-- .filter-intype -->
+		        
+		        <form class="form form-search" action="#">
+		            <strong>快速过滤：</strong>
+		            <input class="form-input form-input-small" placeholder="请输入类别名字或者关键字" title="请输入类别名字或者关键字" />
+		            <input type="submit" class="form-submit button button-grey button-medium" value="搜索" />
+		            热门：
+		            <a href="">热门</a>
+		            <a href="">热门</a>
+		            <a href="">热门</a>
+		        </form>
+			</div> <!-- #filter -->
+	
+			<div class="tab">
+                <ul class="tab-title clearfix">
+                    <li class="tab-title-item"><a href="#">全部</a></li>
+                    <li class="tab-title-item active"><a href="＃">个人</a></li>
+                    <li class="tab-title-item tab-title-item-last"><a href="#">商家</a></li>
+                </ul>
+                
+                <div class="tab-fix">
+                	<strong>出售</strong> | <a class="nohist" href="/ershouqiche/?wanted=1">求购</a>
+                </div>
+                
+            </div> <!-- .tab -->
+            
+            <ul class="list list-thumb">
+        		<li class="list-item list-item-title clearfix">
+        			<span class="list-item-block">图片</span>
+        			<div class="list-item-content">内容</div>
+        			<span class="list-item-block">价钱</span>
+        			<span class="list-item-block">时间</span>
+        		</li>
+
+				{% autopaginate products 20 %}
+
+				{% for product in products %}
+        		<li class="list-item clearfix">
+        			<span class="list-item-block">
+						{% if product.img %}
+						<a href="{{ product.get_url }}"><img src="{{ product.img.url }}" /></a>
+						{% endif %}
+        			</span>
+        			<div class="list-item-content">
+						<a href="{{ product.get_url }}" class="topicLink" target="_blank">{{ product.it_name }}</a>
+						{% if product.img %}
+        				<i>图</i>
+						{% endif %}
+						{% for t in product.sort.all %}
+						<a class="tag tag-blue" href="#">{{ t.name }}</a>
+						{% endfor %}
+						<p class="list-item-content-meta">{{ product.description }}</p>
+        			</div>
+					<span class="list-item-block"><cite>{{ product.price }}</cite> 元</span>
+					<span class="list-item-block">{{ product.exit_date }}</span>
+        		</li>
+				{% endfor %}
+			</ul> <!-- .list -->
+        	
+        	<div class="pagenav clearfix">
+				{% paginate %}
+            </div>
+            
+			<ul class="adsense" style="display: block; border-bottom: 2px solid rgb(206, 241, 42);">
+			</ul>
+            
+            <div class="endtips">
+				<em class="tag tag-green">提醒</em> 没有找到想要的??信息？
+				<a href="{% url 'create_need'  %}" rel="nofollow">马上发一条求购信息</a>
+            </div> <!-- endtips -->
+            
+		</div> <!-- #content -->
+		
+		{% include 'index-aside.html' %}
+	</div> <!-- #gridlist -->
+	
+
+{% endblock %}

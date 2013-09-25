@@ -1,0 +1,27 @@
+{% extends "base-admin.html" %}
+{% block title %}添加分类{% endblock %}
+{% block main %}
+    <h3>添加分类</h3>
+    <hr>
+    <form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+        <table border="0" cellpadding="0" >
+            {% if par != 'root' %}
+                <p class="alert alert-success">为该分类添加子分类</p>
+            {% else %}
+                <p class="alert alert-success" >添加根分类</p>
+            {% endif %}
+            {{ form.as_p }}
+            <p class="alert alert-info ">名称不得超过十个字节</p>
+        </table>
+        <br>
+        <div class="control-group" align="center">
+            <div class="btn-group">
+                <a href="{% url 'list_sort' %}" class="btn btn-info">返回</a>
+            </div>
+            <div class="btn-group">
+                <input type="submit"  class="btn btn-primary" value="添加"/>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

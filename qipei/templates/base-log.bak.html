@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:h="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge,chrome=1,requiresActiveX=true" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="robots" content="" />
+	<title>{% block title %}{% endblock %} - </title>
+
+    
+	<link rel="stylesheet" href="/static/css/page.css" />    
+	<link href="/static/css/base.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="/static/css/puerh.css">
+</head>
+
+<body class='chrome chrome-23 linux'>
+<div id="bxTips" class="hide"><span></span></div>
+<div id="topbar">
+    <div class="topbar ">
+                <div class="topbar-right">
+				<span class="topbar-right-text">
+					<a href="{%url 'register' %}" rel="nofollow">注册</a> |
+					<a href="{%url 'login' %}" rel="nofollow">登录</a>
+                </span> |
+        </div>
+    </div>
+</div> <!-- #topbar -->
+
+<div class="container clearfix">
+    <div id="header-s" class="grid grid-20 clearfix">
+        <div class="logo">
+            <a href="/"><img src="http://static.baixing.net/images/logo_small.png" alt="百姓网" /></a>
+			&gt; 登录
+        </div>
+    </div> <!-- #header-s -->
+</div>
+
+<div class="container clearfix">
+   <div id="container"  style="clear: both;">
+
+   {% block content %}
+        
+   {% endblock %}
+   
+ <div id="footer" class="grid grid-20 clearfix">
+        <div class="copyright">
+            <small>
+                &copy; 2013 汽配商城网 -
+                <a target="_blank" href="#" rel="nofollow">关于</a> -
+                <a target="_blank" href="#">联系我们</a>
+            </small>
+			<!-- <small style="position:relative;">当前: 03-29 19:19</small> -->
+        </div>
+        </div> 
+</div> 
+</body>
+</html>

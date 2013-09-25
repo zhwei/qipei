@@ -1,0 +1,107 @@
+{% extends "base-index.html" %}
+{% block title %}
+我的信息中心 - 汽配商城
+{% endblock title %}
+
+
+
+{% load pagination_tags %}
+
+{% block content %}
+
+<div id="breadcrumb" class="bread grid grid-20">
+  <a class="bread-cell" href="/">汽配商城</a> &gt; 
+  <a class="bread-cell" href="{% url 'custom_page' %}">个人信息中心</a> &gt;
+  <span class="bread-cell bread-cell-current">{{ user.username }}的信息<cite class="bread-cell-cite">（仅个人可见）</cite></span>
+</div> <!-- .bread -->
+
+{% include "custom-sidebar.html" %}
+
+<div id="content" class="grid grid-15 last viewad">
+
+  <h2 class="viewad-title viewad-title-nometa">
+  </h2>
+  <h2 class="viewad-title viewad-title-nometa">{{ user.username }}</h2>
+
+  <div class="viewad-entry typo">
+    <p>
+    {{ store.info }}
+    </p>
+  </div> <!-- .viewad-entry -->
+
+  <div class="tab">
+    <ul class="tab-title clearfix">
+      <li class="tab-title-item tab-title-item active">
+      <a href="#mark_stores" data-toggle="tab">收藏的店铺</a>
+      </li>
+      <li class="tab-title-item tab-title-item">
+      <a href="#mark_products" data-toggle="tab">收藏的产品</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-content-pane active" id="mark_stores">
+        <ul class="list list-thumb">
+
+          {% for store in custom.mark_store.all %}
+          <li class="list-item clearfix">
+          <span class="list-item-block">
+            <img src="{{ store.logo_url }}" alt="{{ store.name }}" height="5px" />
+          </span>
+          <div class="list-item-content">
+            <a href= "{% url 'store_index' store.id %}" class="topicLink" target="_blank">
+              [{{ store.name }}]&nbsp{{ store.description }}
+            </a>
+            <a href="" class="tip icon icon-star" data-content="取消收藏商铺&nbsp;[{{ store.name }}]"></a>
+            <p class="list-item-content-meta">{{ store.tel }}</p>
+          </div>
+          <span class="list-item-content-meta" >加盟时间</span><br />
+          <span class="list-item-content-meta" >{{ store.boss.date_joined | date:"Y年m月d日" }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+
+      </div>
+      <div class="tab-content-pane" id="mark_products">
+        <ul class="list list-thumb">
+          {% for product in custom.mark_product.all %}
+          <li class="list-item clearfix">
+          <span class="list-item-block">
+            {% if product.img %}
+            <a href="{{ product.get_url }}"><img src="{{ product.img.url }}" /></a>
+            {% endif %}
+          </span>
+          <div class="list-item-block-content">
+            <a href="{{ product.get_url }}" class="topicLink" target="_blank">{{ product.it_name }}</a>
+            {% if product.img %}
+            <i>图</i>
+            {% endif %}
+            <a href="" class="tip icon icon-star" data-content="取消收藏商品&nbsp;[{{ product.it_name }}]"></a>
+            {% for t in product.sort.all %}
+            <a class="tag tag-blue" href="#">{{ t.name }}</a>
+            {% endfor %}
+            <p class="list-item-content-meta">{{ product.description }}</p>
+          </div>
+          <span class="list-item-block-pro">
+            <i>生产日期: </i><cite>{{ product.exit_date | date:"Y年m月d日" }}</cite>&nbsp;&nbsp;
+            <i>价格: </i><cite>{{ product.price }}</cite> 元
+          </span>
+          </li>
+          {% endfor %}
+        </ul> <!-- .list -->
+      </div>
+    </div> <!--tab-content-->
+  </div> <!--tab-->
+
+  <div class="pagenav clearfix">
+
+  </div>
+
+</div> <!-- #content -->
+
+</div> <!-- #gridlist -->
+
+<script type="text/javascript">
+  $('.qx').popover();
+  </script>
+  {% endblock content %}

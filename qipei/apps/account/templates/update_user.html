@@ -1,0 +1,18 @@
+{% extends "base-admin.html" %}
+{% block title %}编辑用户信息{% endblock %}
+{% block main %}
+    <h2>编辑用户信息</h2>
+    <hr>
+    <form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
+        <table border="0" cellpadding="0" >
+            <p><tr>用户:&nbsp;&nbsp;</tr><tr>{{ foo.username }}</tr></p>
+            {{ form.as_table }}
+        </table>
+        <br>
+        <div class="control-group" align="center">
+            <div class="btn-group">
+                <input type="submit"  class="btn btn-primary" value="提交"/>
+            </div>
+        </div>
+    </form>
+{% endblock %}

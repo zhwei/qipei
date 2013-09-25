@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load pagination_tags %}
+
+{% block need_content %}
+	<div class="">
+		<a href={% url 'needs_list' %} class="bread-cell">需求市场</a> > 
+		<a href="#" class="bread-cell">需求详情</a> > 
+	</div>
+	<table class='table table-bordered'>
+		<tr>
+			<td class=''>车辆型号</td>
+			<td>{{ need.car_type }}</td>
+		</tr>
+		<tr>
+			<td>需求描述</td>
+			<td>{{ need.long_dsc }}</td>
+		</tr>
+
+		{% if is_dian %}
+			{% if is_order %}
+			<tr>
+				<td>联系方式</td>
+				<td>{{ need.user.email }}</td>
+			</tr>
+			<tr>
+				<td colspan=2>已接单</td>
+			</tr>
+			{% else %}
+	 		<tr>
+	 			<td>联系方式</td>
+	 			<td>只有店家接单后才能查看</td>
+	 		</tr>
+	 
+	 		<tr>
+	 			<td colspan="2">
+	 				<form method='post' action={% url 'create_order_record'%}>
+	 					{% csrf_token %}
+	 					<input type="hidden" name='need' value={{ need.pk }} />
+	 					<input type="submit" value="接单" class='button button-green'/>
+	 				</form>
+	 			</td>
+	 		</tr>
+			{% endif %}
+ 		{% else %}
+	 		<tr>
+	 			<td>联系方式</td>
+	 			<td>只有店家接单后才能查看</td>
+	 		</tr>
+		{% endif %}
+	</table>
+
+
+
+
+	<br/>
+	<br/>
+	<table class='table table-strip'>
+		<tr>
+			<th colspan="2">接单店铺</th>
+		</tr>		
+{% autopaginate order_records 8 %}
+		{% for order_record in order_records %}
+		<tr>
+			<td class='' >{{ order_record.user.username }}</td>
+			<td class='' >{{ order_record.created_at | date:"Y年m月d日 H时i分" }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% paginate %}
+
+{% endblock %}

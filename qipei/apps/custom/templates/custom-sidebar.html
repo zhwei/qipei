@@ -1,0 +1,57 @@
+<div id="gridlist" class="grid grid-20">
+  <div id="aside-left" class="grid grid-5 first clearfix">
+
+    <div class="aside">
+      <div class="aside-box">
+        <a href="#" class="store-logo">
+          {% if custom.avatar_name %}
+            <img src="{{ custom.get_avatar_large }}" alt="{{ user.name }}" />
+          {% else %}
+            <img src="/static/img/defaultavatar.jpg" alt="默认头像" />
+          {% endif %}
+        </a>
+        <h4><a rel="nofollow" href="{% url 'custom_page' %}">{{ store.name }}</a></h4>
+        <ul class="store-info">
+          <li>姓名: {{ user.first_name|default:'<span class="tag tag-red">未填写真实姓名</span>' }}</li>
+          <li>用户名: <b>{{ user.username }}</b></li> 
+          <li>注册日期: {{ user.date_joined|date:'Y年m月d日H点m分' }}</li> 
+          <li>上次登陆: {{ user.last_login|date:'Y年m月d日H点m分' }}</li> 
+        </ul>
+
+        <ul class="store-verify">
+          <li><a href="###" class="icon icon-phone icon-phone-done">手机号</a> {{ custom.mobile|default:'您未填写手机号' }} </li>
+          <li><a href="###" class="icon icon-trade icon-trade-done">实名认证</a> 实名认证</li>
+        </ul>
+      </div> <!-- .aside-box -->
+
+      <div class="aside-box">
+        <h4 class="typo-h4">快捷操作</h4>
+        <a href="{% url 'update_custom_self' %}">修改个人信息</a>
+        <br />
+        <a href="{% url 'update_custom_avatar' %}">修改头像</a>
+        <br />
+        <a href="{% url 'create_need' %}">快速发布需求</a>
+      </div>
+
+      <div class="aside-box">
+        <h4 class="typo-h4">个人介绍</h4>
+        <p>
+        {{ custom.description|default:'您没有个人说明' }}
+        </p>
+      </div>
+
+      <div class="aside-box">
+        <h4 class="typo-h4">友情提醒</h4>
+        发布需求时注意说明您需要的配件型号及具体需求! 
+      </div>
+
+      <div class="aside-box aside-box-noborder">
+        <h4 class="typo-h4">小调查</h4>
+        您对汽配商城满意吗？<br />
+        <p class="aside-box-higher">
+        <a href="＃">满意</a> <a href="＃">不满意</a>
+        </p>
+      </div>
+
+    </div> <!-- .aside -->
+  </div> <!-- #aside -->

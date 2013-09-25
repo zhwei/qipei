@@ -1,0 +1,30 @@
+{% extends "base-admin.html" %}
+{% block title %}商铺信息{% endblock %}
+{% block main %}
+    <h2>商铺信息</h2>
+    <table class="table table-hover" style="">
+        <tbody>
+            <tr><th>商铺名称</th><td>{{ store.name }}</td></tr>
+			<tr><th>logo</th><td>
+					{% if store.logo %}
+						<img src="{{ store.logo.url }}" alt="" width="64" height="64" class="media-object" data-src="holder.js/64x64">
+					{% else %}
+						<p>尚无logo</p>
+					{% endif %}
+				</tr>
+				<tr><th>商铺网址</th><td><a href="{{ store.get_url }}" target="_blank"><strong>{{ store.get_url }}</strong></a></td></tr>
+            <tr><th>网站公告</th><td>{{ store.notice }}</td></tr>
+            <tr><th>联系电话</th><td>{{ store.tel }}</td></tr>
+            <tr><th>QQ</th><td>{{ store.qq }}</td></tr>
+            <tr><th>商铺地址</th><td>{{ store.address }}</td></tr>
+            <tr><th style="width:10%">商铺描述</th><td>{{ store.it_description }}</td></tr>
+        </tbody>
+    </table>
+	<br />
+	{% if user.is_superuser %}
+	<a href="{% url 'update_store' store.id %}" class="btn">编辑商铺信息</a>
+	{% elif user.is_staff %}
+	<a href="{% url 'update_self_store' %}" class="btn">编辑商铺信息</a>
+	<a href="{% url 'update_store_ad' %}" class="btn">编辑商铺广告</a>
+	{% endif %}
+{% endblock %}

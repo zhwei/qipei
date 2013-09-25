@@ -1,0 +1,32 @@
+{% extends "base-admin.html" %}
+{% block title %}全部商铺{% endblock %}
+
+{% load pagination_tags %}
+{% block main %}
+<h2>全部商铺</h2>
+    <a href="{% url 'create_user' 1 %}">创建商户</a>
+<hr>
+<table class="table">
+  <thead>
+    <tr class="info">
+      <th>商铺名</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  {% autopaginate foo 20 %}
+  <tbody>
+    {% for store in foo %}
+    <tr>
+      <th><a href="{{ store.get_url }}">{{ store.name }}</a></th>
+      <th>
+        <a href="{% url 'detail_store' store.id %}" class="btn">详细</a>
+        <a href="{% url 'update_store' store.id %}" class="btn">编辑</a>
+        <a href="{% url 'delete_store' store.id %}" class="btn btn-danger">删除</a>
+      </th>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% paginate %}
+<br />
+{% endblock %}

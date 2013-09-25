@@ -1,0 +1,69 @@
+{% extends 'base-forum.html' %}
+
+{% block title %}论坛交流{% endblock %}
+
+{{ request.user.username }}
+
+{% block content %}
+
+    <!-- 第一部分   放置发帖按钮 和页码导航 -->
+        <div class="pageTab ">
+            <a href="{% url 'create_subject' %}"><img src="/static/img/forum/pn_post.png"></a>
+        </div>
+    <!-- 第二部分  帖子展区 -->
+    <div id="show">
+      <div  id="showNav">
+        <table cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <th >
+                <div class="tf">
+                  <a href="" class="ft12 blueColor">全部主题</a>
+                  <a href="" class="ft12 ">最新</a>
+                  <a href="" class="ft12 blueColor">热门</a>
+                  <a href="" class="ft12 ">精华</a>
+                  <a href="" class="ft12 blueColor">更多</a>
+                </div>
+              </th>
+              <td class="by ft12">作者</td>
+              <td class="num ft12">回复/查看</td>
+              <td class="by ft12">最后修改</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <table cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr id="spaceFrame">
+            <td></td>
+            <th></th>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+        {% if subject %}
+          {% for sub in subject %}
+            <!-- 普通帖 -->
+            <tbody class="normalThred">
+              <tr>
+                <td class="icn"><a href=""><img src="/static/img/forum/folder_common.gif"></a></td>
+                <th class="common"><a href="{% url 'detail_subject' sub.id %}" class="ft14">
+                    {{ sub.title }}</a></th>
+                <td class="by ft12"><a href="">{{ sub.user.username }}</a></td>
+                <td class="num ft12"><a href="{% url 'detail_subject' sub.id %}">{{ sub.reply_set.count }}</a></td>
+                <td class="by ft12"><a href="">{{ sub.update_date }}</a></td>
+              </tr>
+            </tbody>
+            {% endfor %}
+      </table>
+    </div>
+
+
+        {% else %}
+        <h1>暂无主题</h1>
+        <a href="{% url 'create_subject' %}">发表主题</a>
+    {% endif %}
+{% endblock %}
+
+

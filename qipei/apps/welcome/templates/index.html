@@ -1,0 +1,81 @@
+{% extends "base-index.html" %}
+{% block title %}
+首页--汽配商城
+{% endblock %}
+
+{% block content %}
+
+<div id="hot" class="grid grid-20">
+  <h4 id="hot-tips">热门：</h4>
+
+  <div class="grid grid-4 first">
+    <table>
+      <tr>
+        <td><a  class="button button-blue">最新加盟商户</a></td>
+        <td class="sperator">&nbsp;&nbsp;</td>
+        {% for store in stores %}
+        <td class="sperator"> | </td>
+        <td><a href="{{ store.get_url }}">{{ store.name }}</a></td>
+        {% endfor %}
+      </tr>
+      <tr>
+        <td><a  class="button button-blue">最新注册用户</a></td>
+        <td class="sperator">&nbsp;&nbsp;</td>
+        {% for user in users %}
+        <td class="sperator">|</td>
+        <td><a href="#">{% if user.first_name %}{{ user.first_name }}{% else %}{{ user }}{% endif %}</a></td>
+        {% endfor %}
+      </tr>
+    </table>
+  </div>
+  <div id="headline" class="grid grid-16 last">
+  </div>
+</div> <!-- #hot -->
+
+<div id="new-products">
+  <p class="button button-blue">最新上架商品:</p>
+  <hr>
+
+  <div class="wrapper">
+    <div class="index-images clearfix">
+      {% for product in products %}
+
+      <a target="_blank" href="{{ product.get_url }}" class="images-item">
+        <img class="images-item-img" src="{{ product.img_url }}" />
+        <div class="images-item-caption">
+          <strong>{{ product.it_name }}</strong>
+          <p class="images-item-caption-meta">
+          <em>{{ product.exit_date }}</em><br>
+          <cite>{{ product.price }}</cite>
+          </p>
+        </div>
+      </a>
+
+      {% endfor %}
+
+    </div>
+  </div> <!--wrapper-->
+  <hr>
+</div> <!--#new-products-->
+
+<div id="gcats" class="grid grid-20">
+  <div id="glist" class="clearfix">
+    {% for sort in sorts %}
+    <div class="glist">
+      <div class="glist-title">
+        <h3><span class="icon icon-house">#</span> <a href="{{ sort.get_url }}">{{ sort.name }}</a></h3>
+        <cite>{{ sort.product_set.count }}</cite>
+      </div>
+      <div class="glist-section glist-section-last">
+        {% for child  in sort.get_children %}
+        <a href="{{ child.get_url }}">{{ child.name }}</a>
+        {% endfor %}
+      </div>
+    </div> <!-- .glist -->
+
+    {% endfor %}
+
+  </div> <!-- #glist -->
+</div> <!-- #gcats -->
+
+{% endblock %}

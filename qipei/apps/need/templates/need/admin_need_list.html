@@ -1,0 +1,31 @@
+{% extends 'base-admin.html'%}
+{% load pagination_tags %}
+
+{% block main%}
+<div class="">
+<table class="table">
+{% autopaginate needs 15 %}
+    <tr>
+        <th>标题</th>
+        <th>发布时间</th>
+        <th>操作</th>
+    </tr>
+    {% for need in needs %}
+    <tr>
+        <td>
+            <a href= {% url 'admin_need_detail' need.id %} class="topicLink" target="_blank">[{{need.car_type}}]&nbsp{{need.short_dsc}}</a>
+        </td>
+        <td>{{ need.created_at | date:"Y年m月d日 H时i分" }}</td>
+        <td>
+            <form action={% url 'admin_need_delete' need.id %} method="post">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger btn-small"  value="删除">
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% paginate %}
+</div>
+
+{% endblock %}

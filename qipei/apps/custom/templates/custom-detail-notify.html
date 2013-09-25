@@ -1,0 +1,20 @@
+{% extends "base-custom.html" %}
+
+{% block custom-title %}
+我的通知中心
+{% endblock custom-title %}
+
+{% block custom-content %}
+
+      ID:{{ notify.id }}<br>
+      发送者：{{ notify.actor }}<br>
+      主题：{{ notify.verb }}<br>
+      未读：{{ notify.unread }}<br>
+      时间：{{ notify.timesince }}<br>
+      内容：{{ notify.description|safe }}<br>
+
+      <br>
+      <a href="{% url 'custom_notify' %}">back to list</a>
+
+
+{% endblock %}

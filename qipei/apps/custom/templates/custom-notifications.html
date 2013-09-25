@@ -1,0 +1,92 @@
+{% extends "base-index.html" %}
+{% block title %}
+我的通知中心 - 汽配商城
+{% endblock title %}
+
+{% load pagination_tags %}
+
+{% block content %}
+
+<div id="breadcrumb" class="bread grid grid-20">
+  <a class="bread-cell" href="/">汽配商城</a> &gt;
+  <a class="bread-cell" href="{% url 'custom_page' %}">个人信息中心</a> &gt;
+  <span class="bread-cell bread-cell-current">{{ user.username }}的信息<cite class="bread-cell-cite">（仅个人可见）</cite></span>
+</div> <!-- .bread -->
+
+{% include "custom-sidebar.html" %}
+
+<div id="content" class="grid grid-15 last viewad">
+
+  <h2 class="viewad-title viewad-title-nometa">
+  </h2>
+  <h2 class="viewad-title viewad-title-nometa">{{ user.username }}</h2>
+
+  <div class="viewad-entry typo">
+    <p>
+    {{ store.info }}
+    </p>
+  </div> <!-- .viewad-entry -->
+
+  <div class="tab">
+    <ul class="tab-title clearfix">
+      <li class="tab-title-item tab-title-item active">
+      <a href="#unread" data-toggle="tab">未读信息</a>
+      </li>
+      <li class="tab-title-item tab-title-item">
+      <a href="#readed" data-toggle="tab">已读信息</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-content-pane active" id="unread">
+        {% if user.notifications.unread.count == 0 %}
+            <p>无未读消息</p>
+        {% else %}
+        <ul class="list list-thumb">
+            发送者-标题-内容-未读
+            <br>
+            <a href="{% url 'mark_all_read' %}">标记全部已读</a>
+            <br>
+            {% for foo in user.notifications.unread %}
+                {{ foo.actor }}-{{ foo.verb }} --
+                 {{ foo.description }}--{{ foo.unread }} -- {{ foo.timesince }}前
+                <a href="{% url 'custom_detail_notify' foo.id %}">详细</a>
+                <a href="{% url 'mark_read' foo.id %}">标记已读</a>
+                <br>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+      </div>
+      <div class="tab-content-pane" id="readed">
+      {% if user.notifications.read.count == 0 %}
+          <p>无已读通知</p>
+      {% else %}
+
+        <ul class="list list-thumb">
+            {% for foo in user.notifications.read %}
+                {{ foo.actor }}-{{ foo.verb }} --
+                 {{ foo.description }}--{{ foo.unread }} -- {{ foo.timesince }}前
+                <a href="{% url 'custom_detail_notify' foo.id %}">详细</a>
+                <a href="{% url 'mark_unread' foo.id %}">标记未读</a>
+                <br>
+            {% endfor %}
+        </ul> <!-- .list -->
+
+      {% endif %}
+      </div>
+    </div> <!--tab-content-->
+  </div> <!--tab-->
+
+  <div class="pagenav clearfix">
+
+  </div>
+
+</div> <!-- #content -->
+
+</div> <!-- #gridlist -->
+
+<script type="text/javascript">
+  $('.qx').popover();
+  </script>
+  {% endblock content %}

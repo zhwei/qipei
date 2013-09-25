@@ -1,0 +1,67 @@
+{% extends "base-index.html" %}
+{% block title %}
+我的信息中心 - 汽配商城
+{% endblock title %}
+
+
+
+{% load pagination_tags %}
+
+{% block content %}
+
+<div id="breadcrumb" class="bread grid grid-20">
+  <a class="bread-cell" href="/">汽配商城</a> &gt; 
+  <a class="bread-cell" href="{% url 'custom_page' %}">个人信息中心</a> &gt;
+  <span class="bread-cell bread-cell-current">{{ user.username }}的信息<cite class="bread-cell-cite">（仅个人可见）</cite></span>
+</div> <!-- .bread -->
+
+    {% include "custom-sidebar.html" %}
+
+<div id="content" class="grid grid-15 last viewad">
+
+  <h2 class="viewad-title viewad-title-nometa">
+      {% if user.first_name %}
+        {{ user.first_name }} - 修改信息
+      {% else %}
+        {{ user.username }} - 修改信息
+      {% endif %} 
+  </h2>
+
+  <div class="pagenav clearfix">
+  </div>
+
+
+    <div id="publish-flow" class="grid-15">
+        <form action="" method="POST" class="form">
+            {% csrf_token %}
+            {% for field in form %}
+                <p class="p-line">
+                    <label for="" class="p-label">
+                        <cite class="red">*&nbsp;</cite>{{ field.label }}:&nbsp;&nbsp;&nbsp;&nbsp;
+                    </label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <cite class="p-note">{{ field.help_text }}</cite>
+                    {% endif %}
+                    {% if field.errors %}
+                        <cite class="red p-note">{{ field.errors }}</cite>
+                    {% endif %}
+                </p>
+            {% endfor %}
+
+            <div>
+                <input type="reset" value="重填" class="form-submit button"/>
+                <input type="submit" value="提交" class="form-submit button button-green"/>
+            </div>
+
+
+        </form>
+    </div>
+
+</div> <!-- #content -->
+
+
+<script type="text/javascript">
+  $('.qx').popover();
+  </script>
+  {% endblock content %}
