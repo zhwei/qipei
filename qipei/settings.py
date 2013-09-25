@@ -22,7 +22,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
     # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
     # 'NAME': os.path.join(os.path.dirname(__file__), 'db/mysite.db').replace('\\','/'),                      # Or path to database file if using sqlite2
-        'NAME': 'qqq',
+        'NAME': 'qipei2',
     # Or path to database file if using sqlite2
         # The following settings are not used with sqlite3:
         'USER': 'root', #开发用
