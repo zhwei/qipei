@@ -41,7 +41,7 @@
       {% for product in products %}
 
       <a target="_blank" href="{{ product.get_url }}" class="images-item">
-        <img class="images-item-img" src="{{ product.img_url }}" />
+        <img class="images-item-img" src="{{ product.img.url|default:"/static/img/defaultlogo.jpg" }}" />
         <div class="images-item-caption">
           <strong>{{ product.it_name }}</strong>
           <p class="images-item-caption-meta">

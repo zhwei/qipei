@@ -5,28 +5,30 @@
     <span>欢迎来到淄博王舍汽配网上商城!&nbsp;&nbsp;&nbsp;</span>
 
     {% if user.is_superuser %}
+            {% notifications_unread as unread_count %}
 
         <span class="topbar-right-text">管理员，<a href="#">{{ user.username }}</a>
           [<a href="{% url 'logout' %}">退出</a>]</span>
         - <a target="_blank" rel="nofollow" href="{% url 'admin_index' %}">网站后台</a>
         <div id="shownotice" class="dropdown dropdown-unibody">
-            <a class="dropdown-trigger dropdown-trigger-active" data-toggle="dropdown" hidefocus="" data-target="#shownotice" href="#">消息<cite>1</cite><i class="arrow arrow-down"></i></a>
+            <a class="dropdown-trigger dropdown-trigger-active" data-toggle="dropdown" hidefocus="" data-target="#shownotice" href="/custom/self/notifications/">消息<cite>{{ unread_count }}</cite><i class="arrow arrow-down"></i></a>
             <ul class="dropdown-menu clearfix">
-                <li class="dropdown-menu-item"><a href="#"><cite>1</cite>条系统提示</a></li>
+                <li class="dropdown-menu-item"><a href="/custom/self/notifications/"><cite>{{ unread_count }}</cite>条系统提示</a></li>
             </ul>
         </div>
 
     {% elif user.is_staff %}
 
+            {% notifications_unread as unread_count %}
 
         <span class="topbar-right-text">商户，<a href="#">{{ user.username }}</a>
           [<a href="{% url 'logout' %}">退出</a>]</span>
         - <a target="_blank" rel="nofollow" href="{% url 'admin_index' %}">商户后台</a>
         - <a target="_blank" rel="nofollow" href="#">付费推广</a>
         <div id="shownotice" class="dropdown dropdown-unibody">
-            <a class="dropdown-trigger dropdown-trigger-active" data-toggle="dropdown" hidefocus="" data-target="#shownotice" href="#">消息<cite>1</cite><i class="arrow arrow-down"></i></a>
+            <a class="dropdown-trigger dropdown-trigger-active" data-toggle="dropdown" hidefocus="" data-target="#shownotice" href="/custom/self/notifications/">消息<cite>{{ unread_count }}</cite><i class="arrow arrow-down"></i></a>
             <ul class="dropdown-menu clearfix">
-                <li class="dropdown-menu-item"><a href="#"><cite>1</cite>条系统提示</a></li>
+                <li class="dropdown-menu-item"><a href="/custom/self/notifications/"><cite>{{ unread_count }}</cite>条系统提示</a></li>
             </ul>
         </div>
         - <a rel="nofollow" class="tag tag-green" target="_blank" href="#" id="postAd">免费发布信息</a>
