@@ -3,6 +3,10 @@ qipei
 
 汽配商城
 
+Demo
+-------------------
+[http://qp.gotit.asia](http://qp.gotit.asia)
+
 开发环境
 ----------------------
 + python2.7.3  
