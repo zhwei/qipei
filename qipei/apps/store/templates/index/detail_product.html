@@ -61,16 +61,16 @@
           <tr>
               <td class="first">操作</td>
             <td>
-                <a href="{% url 'update_product' product.id %}">xiugaishangpin</a>
-                <a href="{% url 'delete_product' product.id %}">shanchu</a>
+                <a href="{% url 'update_product' product.id %}">修改商品</a>
+                <a href="{% url 'delete_product' product.id %}">删除商品</a>
             </td>
           </tr>
       {% elif user.is_staff %}
           <tr>
               <td class="first">操作</td>
               <td>
-                  <a href="{% url 'update_product' product.id %}">xiugaishangpin</a>
-                  <a href="{% url 'delete_product' product.id %}">shanchu_ sahnghu</a>
+                  <a href="{% url 'update_product' product.id %}">修改商品</a>
+                  <a href="{% url 'delete_product' product.id %}">删除商品</a>
               </td>
           </tr>
       {% else %}

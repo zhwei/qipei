@@ -84,7 +84,7 @@ def update_product(request, product_id):
 
     product_instance = get_object_or_404(Products, id=product_id)
 
-    if request.user.is_superuser and request.user == product_instance.company.boss_id:
+    if request.user.is_superuser or request.user == product_instance.company.boss_id:
         pass
     else:
         raise Http404

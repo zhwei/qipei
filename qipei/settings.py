@@ -8,7 +8,7 @@ DIR = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-DOMAIN = "http://127.0.0.1:8000"
+DOMAIN = "http://qp.gotit.asia"
 #DOMAIN = "http://210.44.176.58:8080"
 
 ADMINS = (
@@ -26,7 +26,7 @@ DATABASES = {
     # Or path to database file if using sqlite2
         # The following settings are not used with sqlite3:
         'USER': 'root', #开发用
-        'PASSWORD': 'zhw',
+        'PASSWORD': 'group_0611',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
