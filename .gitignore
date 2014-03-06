@@ -2,3 +2,4 @@ DjangoUeditor/*
 qipei/media/*
 qipei/xapian_index/*
 qipei/db/*
+qipei/static/*
